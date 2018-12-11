@@ -1,5 +1,5 @@
 language: cpp
-dist: trusty
+dist: xenial
 sudo: false
 
 compiler:
@@ -9,9 +9,9 @@ compiler:
 addons:
   apt:
     sources:
-      - ubuntu-toolchain-r-test
+      # - ubuntu-toolchain-r-test
     packages:
-      - g++-6
+      # - g++-6
       - libopenmpi-dev
       - openmpi-bin
       - python-numpy
