@@ -21,6 +21,9 @@ if [ ! -d $LOCAL_INSTALL/include ]; then
     ./bootstrap.sh --prefix=$LOCAL_INSTALL > ~/boost.bootstrap
     ./b2 -j2 --with-program_options --with-test --with-filesystem --with-log install > ~/boost.b2
 
+    echo $PETSC
+    echo $MPI
+
     # Download and compile PETSc
     cd $LOCAL_INSTALL
     git clone -b maint https://bitbucket.org/petsc/petsc petsc

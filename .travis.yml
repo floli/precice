@@ -42,7 +42,8 @@ cache:
     - $LOCAL_INSTALL
 
 before_install:
-  - if [ "$CXX" = "g++" ]; then export CXX="g++-6" && export CC="gcc-6"; fi
+  # - if [ "$CXX" = "g++" ]; then export CXX="g++-6" && export CC="gcc-6"; fi
+  - echo $CXX
   - export OMPI_CXX=$CXX
   - if [ "$MPI" = "on" ]; then export CXX="mpicxx"; fi
 
@@ -54,7 +55,7 @@ before_script:
 
 script:
   - cd $TRAVIS_BUILD_DIR
-  - /usr/bin/python2 /usr/bin/scons -j 2 petsc=$PETSC mpi=$MPI python=on compiler=$CXX staticlib bin solib tests symlink
+  - scons -j 2 petsc=$PETSC mpi=$MPI python=on compiler=$CXX staticlib bin solib tests symlink
   - cd tests
   - if [ "$MPI" = "off" ]; then ../build/last/testprecice -x -r detailed > boost-test-output; fi
   - if [ "$MPI" = "on"  ]; then mpirun.openmpi --mca btl_base_warn_component_unused 0 -n 4 --output-filename boost-test-output  ../build/last/testprecice -r detailed; fi
