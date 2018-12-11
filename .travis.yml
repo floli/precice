@@ -13,6 +13,7 @@ addons:
       # - ubuntu-toolchain-r-test
     packages:
       # - g++-6
+      - scons
       - libopenmpi-dev
       - openmpi-bin
       - python-numpy
