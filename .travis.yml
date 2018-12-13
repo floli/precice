@@ -18,6 +18,7 @@ addons:
 
 env:
   global:
+    - MPIEXEC_PREFIX_DEFAULT # prefix lines with rank for MPI
     - HWLOC_HIDE_ERRORS=1
     - PRECICE_ROOT="$TRAVIS_BUILD_DIR"
     - LOCAL_INSTALL="$HOME/local"
@@ -52,7 +53,7 @@ script:
   - scons -j 2 petsc=$PETSC mpi=$MPI python=on compiler=$CXX staticlib bin solib tests symlink
   - cd tests
   - if [ "$MPI" = "off" ]; then ../build/last/testprecice -x -r detailed > boost-test-output; fi
-  - if [ "$MPI" = "on"  ]; then mpirun.mpich -n 4 --output-filename boost-test-output  ../build/last/testprecice -r detailed; fi
+  - if [ "$MPI" = "on"  ]; then mpirun.mpich -n 4 ../build/last/testprecice -r detailed; fi
 
 after_failure:
   - cd $TRAVIS_BUILD_DIR
